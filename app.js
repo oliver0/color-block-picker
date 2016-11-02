@@ -49,11 +49,8 @@ $(document).ready(function () {
             cssColorNames.push(removedColor);
           }
         }
-        console.log(cssColorNames);
-        console.log(colorsArray);
         $(this).parent().remove();
       }
-
   });
 
   // when clicked a new square is added along with properties. the color is randomly chosen from the cssColorNames array, which is then pushed to the
@@ -66,8 +63,8 @@ $(document).ready(function () {
     var random = randomNumber(0, cssColorNames.length-1);
     var cssColor = cssColorNames.splice(random, 1);
     colorsArray.push(cssColor);
-    $('#container').append('<div class="' + cssColor + '" square"><button class=' + cssColor + '>delete</button></div>');
-    $('#container').find('div').last().css({'background-color': cssColor, 'width': '100px', 'height': '100px', 'display': 'inline-block', 'margin': '20px'});    //$('#container').children().last().addClass(cssColor);
+    $('#container').append('<div class="' + cssColor + ' square"><button class=' + cssColor + '>delete</button></div>');
+    $('#container').find('div').last().css('background-color', cssColor); //'width': '100px', 'height': '100px', 'display': 'inline-block', 'margin': '20px'});    //$('#container').children().last().addClass(cssColor);
     }
 
   });
@@ -78,8 +75,8 @@ $(document).ready(function () {
 
   function appendInitialColors(){
     for(i=0; i < colorsArray.length; i++){
-    $('#container').append('<div class="' + colorsArray[i] + '" square"><button class=' + colorsArray[i] + '>delete</button></div>');
-    $('#container').find('div').last().css({'background-color': colorsArray[i], 'width': '100px', 'height': '100px', 'display': 'inline-block', 'margin': '20px'});
+    $('#container').append('<div class="' + colorsArray[i] + ' square"><button class=' + colorsArray[i] + '>delete</button></div>');
+    $('#container').find('div').last().css('background-color', colorsArray[i]);//, 'width': '100px', 'height': '100px', 'display': 'inline-block', 'margin': '20px'});
     }
   }
 
