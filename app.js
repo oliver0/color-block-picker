@@ -19,7 +19,9 @@ $(document).ready(function () {
   // and sets current color to a randomly chosen one, resets the prompt message and empties #message
 
   $('#container').on('click', 'div', function () {
-    var clickedColor = $(this).attr('class');
+    // this gets the first class name which is the color we want to check for in this function
+    var clickedColor = $(this).attr('class').split(' ')[0];
+
     if(clickedColor == currentColor) {
       alert("Nice! You picked wisely!");
       var random = randomNumber(0, colorsArray.length-1);
