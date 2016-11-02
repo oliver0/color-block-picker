@@ -1,9 +1,14 @@
 $(document).ready(function () {
+  //array of potential colors to choose from
   var cssColorNames = ["Aqua","Black","Brown","Coral","Cyan","Grey","Indigo","Ivory","Lavender","Lime","Magenta","Maroon","Navy","Olive","Orange","Pink","Plum","Purple","Salmon","Silver","Teal","Turquoise","Violet"];
+
+  //current colors on the DOM
   var colorsArray = ['red', 'green', 'yellow', 'blue'];
+  //appends initial squares
   appendInitialColors();
   $('body').append('<button id="add">Add</button>');
 
+  // selects the current color randomly from the color Array
   var currentColor = colorsArray[randomNumber(0, colorsArray.length-1)];
   var stringChoose = '';
   $('#title').text('Please pick the ' + currentColor + ' box!');
@@ -30,8 +35,12 @@ $(document).ready(function () {
   });
 
   // This is listening for a click on the delete button. If it is hit it removes the color from color array
-  // then pushes
-  $('#container').on('click', 'button', function () {
+  // using splice then pushes it to cssColorNames array to potentially be used later. Finally it removes the buttons
+  // parent which removes the square and button.
+  $('#container').on('click', 'button', function (e) {
+    // stops tne event bubbling after this is executed. beforehand the listener for the div was also executing as it
+    // is the parent of the button
+    e.stopPropagation();
     for(i=0; i <colorsArray.length; i++){
       if(colorsArray[i]==$(this).attr('class')){
         var removedColor = colorsArray.splice(i, 1);
@@ -43,7 +52,10 @@ $(document).ready(function () {
     $(this).parent().remove();
   });
 
-  $('#add').on('click', function(){
+  // when clicked a new square is added along with properties. the color is randomly chosen from the cssColorNames array, which is then pushed to the
+  // colorArray -- an array of the colors currently on the DOM
+  $('#add').on('click', function(e){
+
     if(cssColorNames.length == 0){
       alert('Sorry, no more colors!');
     } else {
@@ -58,8 +70,7 @@ $(document).ready(function () {
 
 
 
-
-
+  // appends initial squares
 
   function appendInitialColors(){
     for(i=0; i < colorsArray.length; i++){
