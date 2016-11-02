@@ -1,8 +1,11 @@
 $(document).ready(function () {
-  
-  $('#container').append('<div id="red" class="square"></div><div id="green" class="square"></div><div id="yellow" class="square"></div><div id="blue" class="square"></div>')
   var cssColorNames = ["Aqua","Black","Blue","Brown","Coral","Cyan","Grey","Green","Indigo","Ivory","Lavender","Lime","Magenta","Maroon","Navy","Olive","Orange","Pink","Plum","Purple","Red","Salmon","Silver","Teal","Turquoise","Violet","Yellow"];
   var colorsArray = ['red', 'green', 'yellow', 'blue'];
+  for(i=0; i < colorsArray.length; i++){
+    $('#container').append('<div id=' + colorsArray[i] + ' class="square"></div>');
+  }
+  //$('#container').append('<div id="red" class="square"></div><div id="green" class="square"></div><div id="yellow" class="square"></div><div id="blue" class="square"></div>')
+
   var currentColor = colorsArray[randomNumber(0, colorsArray.length)];
   var stringChoose = '';
   $('#title').text('Please pick the ' + currentColor + ' box!');
