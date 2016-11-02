@@ -17,7 +17,6 @@ $(document).ready(function () {
   // This is listening for a click on one of the squares. It checks to see if the class of the
   // clicked color matches the currently chosen guessing color. If it matches, alerts winning message
   // and sets current color to a randomly chosen one, resets the prompt message and empties #message
-  //
 
   $('#container').on('click', 'div', function () {
     var clickedColor = $(this).attr('class');
@@ -41,15 +40,20 @@ $(document).ready(function () {
     // stops tne event bubbling after this is executed. beforehand the listener for the div was also executing as it
     // is the parent of the button
     e.stopPropagation();
-    for(i=0; i <colorsArray.length; i++){
-      if(colorsArray[i]==$(this).attr('class')){
-        var removedColor = colorsArray.splice(i, 1);
-        cssColorNames.push(removedColor);
+    if(currentColor ==$(this).attr('class')){
+      alert("Sorry, you can't delete the color to be chosen!");
+    } else {
+        for(i=0; i <colorsArray.length; i++){
+          if(colorsArray[i]==$(this).attr('class')){
+            var removedColor = colorsArray.splice(i, 1);
+            cssColorNames.push(removedColor);
+          }
+        }
+        console.log(cssColorNames);
+        console.log(colorsArray);
+        $(this).parent().remove();
       }
-    }
-    console.log(cssColorNames);
-    console.log(colorsArray);
-    $(this).parent().remove();
+
   });
 
   // when clicked a new square is added along with properties. the color is randomly chosen from the cssColorNames array, which is then pushed to the
