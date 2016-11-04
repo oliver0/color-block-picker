@@ -1,3 +1,5 @@
+
+
 $(document).ready(function () {
   //array of potential colors to choose from
   var cssColorNames = ["Aqua","Black","Brown","Coral","Cyan","Grey","Indigo","Ivory","Lavender","Lime","Magenta","Maroon","Navy","Olive","Orange","Pink","Plum","Purple","Salmon","Silver","Teal","Turquoise","Violet"];
@@ -25,7 +27,7 @@ $(document).ready(function () {
     if(clickedColor == currentColor) {
       alert("Nice! You picked wisely!");
       var random = randomNumber(0, colorsArray.length-1);
-      currentColor = colorsArray[randomNumber(0, colorsArray.length-1)];
+      currentColor = colorsArray[random];
       stringChoose = 'Please pick the ' + currentColor + ' box!';
       $('#title').text(stringChoose);
       $('#message').empty();
@@ -42,11 +44,12 @@ $(document).ready(function () {
     // stops tne event bubbling after this is executed. beforehand the listener for the div was also executing as it
     // is the parent of the button
     e.stopPropagation();
-    if(currentColor ==$(this).attr('class')){
+    var buttonClass = $(this).attr('class');
+    if(currentColor == buttonClass){
       alert("Sorry, you can't delete the color to be chosen!");
     } else {
         for(i=0; i <colorsArray.length; i++){
-          if(colorsArray[i]==$(this).attr('class')){
+          if(colorsArray[i] == buttonClass){
             var removedColor = colorsArray.splice(i, 1);
             cssColorNames.push(removedColor);
           }
@@ -65,28 +68,22 @@ $(document).ready(function () {
     var random = randomNumber(0, cssColorNames.length-1);
     var cssColor = cssColorNames.splice(random, 1);
     colorsArray.push(cssColor);
-    $('#container').append('<div class="' + cssColor + ' square"><button class=' + cssColor + '>delete</button></div>');
+    $('#container').append('<div class="' + cssColor + ' square"><button class=' + cssColor + '>X</button></div>');
     $('#container').find('div').last().css('background-color', cssColor); //'width': '100px', 'height': '100px', 'display': 'inline-block', 'margin': '20px'});    //$('#container').children().last().addClass(cssColor);
     }
-
   });
-
-
 
   // appends initial squares
 
   function appendInitialColors(){
     for(i=0; i < colorsArray.length; i++){
-    $('#container').append('<div class="' + colorsArray[i] + ' square"><button class=' + colorsArray[i] + '>delete</button></div>');
+    $('#container').append('<div class="' + colorsArray[i] + ' square"><button class=' + colorsArray[i] + '>X</button></div>');
     $('#container').find('div').last().css('background-color', colorsArray[i]);//, 'width': '100px', 'height': '100px', 'display': 'inline-block', 'margin': '20px'});
     }
   }
 
-  function randomNumber(min, max){
-      return Math.floor(Math.random() * (1 + max - min) + min);
-  }
 });
 
-
-
-//console.log(randomNumber(0, 3));
+function randomNumber(min, max){
+    return Math.floor(Math.random() * (1 + max - min) + min);
+}
